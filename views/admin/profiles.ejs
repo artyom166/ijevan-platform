@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="hy">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Admin — Profiles</title>
+
+<link
+    rel="stylesheet"
+    href="/css/style.css"
+>
+
+</head>
+
+<body>
+
+<%- include("../partials/nav") %>
+
+<main class="container">
+
+<h1>
+    👤 Պրոֆիլներ
+</h1>
+
+<div class="admin-nav">
+
+<a
+    href="/admin"
+    class="btn secondary"
+>
+    Dashboard
+</a>
+
+<a
+    href="/admin/reports"
+    class="btn secondary"
+>
+    Reports
+</a>
+
+</div>
+
+
+<div class="table-wrapper">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+<th>Անվանում</th>
+<th>Owner</th>
+<th>Կատեգորիա</th>
+<th>Գործողություն</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<% profiles.forEach(p => { %>
+
+<tr>
+
+<td>
+    <%= p.id %>
+</td>
+
+<td>
+
+<a href="/profile/<%= p.id %>">
+
+<%= p.title %>
+
+</a>
+
+</td>
+
+<td>
+    <%= p.owner %>
+</td>
+
+<td>
+    <%= p.category %>
+</td>
+
+<td>
+
+<form
+    method="POST"
+    action="/admin/profiles/<%= p.id %>/delete"
+>
+
+<button
+    class="btn danger"
+    data-confirm="Ջնջե՞լ այս պրոֆիլը։"
+>
+    Ջնջել
+</button>
+
+</form>
+
+</td>
+
+</tr>
+
+<% }) %>
+
+</tbody>
+
+</table>
+
+</div>
+
+</main>
+
+<script src="/js/app.js"></script>
+
+</body>
+
+</html>

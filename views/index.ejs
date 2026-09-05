@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="hy">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Իջևան — մարդիկ և ծառայություններ</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/style.css"
+    >
+
+</head>
+
+<body>
+
+<%- include("partials/nav") %>
+
+<main class="container">
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="badge">
+                📍 ԻՋԵՎԱՆ
+            </div>
+
+            <h1>
+                Իջևանի մարդիկ՝
+                <span>մեկ տեղում</span>
+            </h1>
+
+            <p>
+                Գտիր մասնագետների, ծառայությունների
+                ու տեղական բիզնեսների։
+            </p>
+
+            <form
+                class="search-box"
+                method="GET"
+                action="/"
+            >
+
+                <input
+                    type="text"
+                    name="q"
+                    value="<%= q %>"
+                    placeholder="🔎 Փնտրիր մարդ կամ ծառայություն..."
+                >
+
+                <select name="category">
+
+                    <option value="">
+                        Բոլոր կատեգորիաները
+                    </option>
+
+                    <% categories.forEach(c => { %>
+
+                        <option
+                            value="<%= c.id %>"
+                            <%= String(category) === String(c.id)
+                                ? "selected"
+                                : "" %>
+                        >
+                            <%= c.icon %>
+                            <%= c.name %>
+                        </option>
+
+                    <% }) %>
+
+                </select>
+
+                <button class="btn">
+                    Որոնել
+                </button>
+
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <section>
+
+        <div class="section-title">
+
+            <div>
+                <small>ԲԱՑԱՀԱՅՏԻՐ</small>
+                <h2>
+                    Կատեգորիաներ
+                </h2>
+            </div>
+
+        </div>
+
+        <div class="categories">
+
+            <a
+                href="/"
+                class="category"
+            >
+                ✨
+                <span>Բոլորը</span>
+            </a>
+
+            <% categories.forEach(c => { %>
+
+                <a
+                    href="/?category=<%= c.id %>"
+                    class="category"
+                >
+
+                    <strong>
+                        <%= c.icon %>
+                    </strong>
+
+                    <span>
+                        <%= c.name %>
+                    </span>
+
+                </a>
+
+            <% }) %>
+
+        </div>
+
+    </section>
+
+
+    <section class="profiles-section">
+
+        <div class="section-title">
+
+            <div>
+
+                <small>
+                    ԻՋԵՎԱՆԻ ՀԱՄԱՅՆՔ
+                </small>
+
+                <h2>
+                    Վերջին պրոֆիլները
+                </h2>
+
+            </div>
+
+            <% if (user) { %>
+
+                <a
+                    href="/add-profile"
+                    class="btn"
+                >
+                    + Ավելացնել պրոֆիլ
+                </a>
+
+            <% } %>
+
+        </div>
+
+
+        <% if (profiles.length === 0) { %>
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    🔍
+                </div>
+
+                <h3>
+                    Ոչինչ չգտնվեց
+                </h3>
+
+                <p>
+                    Փորձիր ուրիշ որոնում կամ
+                    կատեգորիա։
+                </p>
+
+            </div>
+
+        <% } %>
+
+
+        <div class="profile-grid">
+
+            <% profiles.forEach(p => { %>
+
+                <article class="profile-card">
+
+                    <div class="profile-image">
+
+                        <% if (p.image) { %>
+
+                            <img
+                                src="<%= p.image %>"
+                                alt="<%= p.title %>"
+                            >
+
+                        <% } else { %>
+
+                            <span>
+                                <%= p.icon %>
+                            </span>
+
+                        <% } %>
+
+                    </div>
+
+
+                    <div class="profile-body">
+
+                        <div class="profile-category">
+
+                            <%= p.icon %>
+                            <%= p.category %>
+
+                        </div>
+
+                        <h3>
+                            <%= p.title %>
+                        </h3>
+
+                        <p class="description">
+
+                            <%= p.description
+                                ? p.description.substring(0, 120)
+                                : "Ծառայության նկարագրություն չկա։" %>
+
+                            <% if (p.description &&
+                                p.description.length > 120) { %>
+                                …
+                            <% } %>
+
+                        </p>
+
+                        <div class="rating">
+
+                            ⭐
+                            <%= Number(p.rating).toFixed(1) %>
+
+                            <span>
+                                (<%= p.review_count %>)
+                            </span>
+
+                        </div>
+
+                        <div class="owner">
+
+                            👤 <%= p.owner %>
+
+                            <span>
+                                📍 Իջևան
+                            </span>
+
+                        </div>
+
+                        <a
+                            href="/profile/<%= p.id %>"
+                            class="btn full"
+                        >
+                            Դիտել պրոֆիլը →
+                        </a>
+
+                    </div>
+
+                </article>
+
+            <% }) %>
+
+        </div>
+
+    </section>
+
+</main>
+
+<script src="/js/app.js"></script>
+
+</body>
+
+</html>

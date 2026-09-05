@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="hy">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Մուտք — Ijevan</title>
+
+<link
+    rel="stylesheet"
+    href="/css/style.css"
+>
+
+</head>
+
+<body>
+
+<%- include("partials/nav") %>
+
+<div class="form-page">
+
+    <div class="form-card">
+
+        <div class="form-icon">
+            🔐
+        </div>
+
+        <h1>
+            Բարի վերադարձ
+        </h1>
+
+        <p>
+            Մուտք գործիր քո հաշիվ։
+        </p>
+
+        <% if (error) { %>
+
+            <div class="alert">
+                <%= error %>
+            </div>
+
+        <% } %>
+
+        <form method="POST">
+
+            <label>
+                Email
+            </label>
+
+            <input
+                class="input"
+                type="email"
+                name="email"
+                required
+            >
+
+            <label>
+                Գաղտնաբառ
+            </label>
+
+            <input
+                class="input"
+                type="password"
+                name="password"
+                required
+            >
+
+            <button
+                class="btn full"
+                type="submit"
+            >
+                Մուտք գործել
+            </button>
+
+        </form>
+
+        <p class="form-bottom">
+            Դեռ հաշիվ չունե՞ս։
+            <a href="/register">
+                Գրանցվել
+            </a>
+        </p>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="hy">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Admin — Reports</title>
+
+<link
+    rel="stylesheet"
+    href="/css/style.css"
+>
+
+</head>
+
+<body>
+
+<%- include("../partials/nav") %>
+
+<main class="container">
+
+<h1>
+    🚨 Reports
+</h1>
+
+<div class="admin-nav">
+
+<a
+    href="/admin"
+    class="btn secondary"
+>
+    Dashboard
+</a>
+
+<a
+    href="/admin/profiles"
+    class="btn secondary"
+>
+    Պրոֆիլներ
+</a>
+
+</div>
+
+
+<div class="table-wrapper">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Պրոֆիլ</th>
+<th>Ուղարկող</th>
+<th>Պատճառ</th>
+<th>Status</th>
+<th>Գործողություն</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<% reports.forEach(r => { %>
+
+<tr>
+
+<td>
+    <%= r.title %>
+</td>
+
+<td>
+    <%= r.reporter %>
+</td>
+
+<td>
+    <%= r.reason %>
+</td>
+
+<td>
+    <%= r.status %>
+</td>
+
+<td>
+
+<form
+    method="POST"
+    action="/admin/reports/<%= r.id %>/status"
+>
+
+<select
+    name="status"
+    class="status-select"
+>
+
+<option value="pending">
+    pending
+</option>
+
+<option value="reviewed">
+    reviewed
+</option>
+
+<option value="resolved">
+    resolved
+</option>
+
+</select>
+
+<button class="btn">
+    Պահել
+</button>
+
+</form>
+
+</td>
+
+</tr>
+
+<% }) %>
+
+</tbody>
+
+</table>
+
+</div>
+
+</main>
+
+</body>
+
+</html>

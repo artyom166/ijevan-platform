@@ -1,0 +1,69 @@
+<nav class="navbar">
+
+    <div class="nav-inner">
+
+        <a href="/" class="logo">
+            IJE<span>VAN</span>
+        </a>
+
+        <div class="nav-links">
+
+            <a href="/">Գլխավոր</a>
+
+            <% if (user) { %>
+
+                <a href="/favorites">
+                    ❤️ Պահվածներ
+                </a>
+
+                <a href="/add-profile">
+                    + Ավելացնել
+                </a>
+
+                <% if (user.is_admin) { %>
+
+                    <a href="/admin">
+                        🛠 Admin
+                    </a>
+
+                <% } %>
+
+                <span class="user-name">
+                    👤 <%= user.name %>
+                </span>
+
+                <form
+                    method="POST"
+                    action="/logout"
+                    class="inline-form"
+                >
+                    <button class="btn secondary">
+                        Դուրս գալ
+                    </button>
+                </form>
+
+            <% } else { %>
+
+                <a href="/login">
+                    Մուտք
+                </a>
+
+                <a href="/register" class="btn">
+                    Գրանցվել
+                </a>
+
+            <% } %>
+
+            <% if (user) { %>
+
+    <a href="/my-services">
+        📋 Իմ ծառայությունները
+    </a>
+
+     <% } %>
+
+        </div>
+
+    </div>
+
+</nav>

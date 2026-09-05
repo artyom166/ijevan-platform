@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="hy">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Իմ ծառայությունները | Ijevan</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/style.css"
+    >
+</head>
+
+<body>
+
+    <%- include("partials/nav") %>
+
+    <main class="container">
+
+        <div class="page-header">
+
+            <h1>
+                📋 Իմ ծառայությունները
+            </h1>
+
+            <a
+                href="/add-profile"
+                class="btn"
+            >
+                ➕ Ավելացնել նոր
+            </a>
+
+        </div>
+
+
+        <% if (profiles.length === 0) { %>
+
+            <div class="empty-state">
+
+                <h2>
+                    Դեռ ծառայություն չունես
+                </h2>
+
+                <p>
+                    Ավելացրու քո ծառայությունը,
+                    որպեսզի այն տեսնեն Իջևանի օգտատերերը։
+                </p>
+
+                <a
+                    href="/add-profile"
+                    class="btn"
+                >
+                    ➕ Ավելացնել ծառայություն
+                </a>
+
+            </div>
+
+        <% } %>
+
+
+        <div class="profiles-grid">
+
+            <% profiles.forEach(profile => { %>
+
+                <div class="profile-card">
+
+                    <% if (profile.image) { %>
+
+                        <img
+                            src="<%= profile.image %>"
+                            alt="<%= profile.title %>"
+                            class="profile-image"
+                        >
+
+                    <% } else { %>
+
+                        <div class="profile-image no-image">
+                            <%= profile.icon %>
+                        </div>
+
+                    <% } %>
+
+
+                    <div class="profile-content">
+
+                        <div class="profile-category">
+                            <%= profile.icon %>
+                            <%= profile.category %>
+                        </div>
+
+                        <h2>
+                            <%= profile.title %>
+                        </h2>
+
+                        <p>
+                            <%= profile.description || "Նկարագրություն չկա" %>
+                        </p>
+
+                        <div class="profile-info">
+
+                            <% if (profile.address) { %>
+                                📍 <%= profile.address %>
+                            <% } %>
+
+                            <% if (profile.phone) { %>
+                                <br>
+                                📞 <%= profile.phone %>
+                            <% } %>
+
+                        </div>
+
+
+                        <div class="profile-rating">
+
+                            ⭐
+                            <%= Number(profile.rating).toFixed(1) %>
+
+                            <span>
+                                (<%= profile.review_count %> կարծիք)
+                            </span>
+
+                        </div>
+
+
+                        <div class="profile-actions">
+
+                            <a
+                                href="/profile/<%= profile.id %>"
+                                class="btn"
+                            >
+                                👁️ Դիտել
+                            </a>
+
+                            <a
+                                href="/profile/<%= profile.id %>/edit"
+                                class="btn btn-secondary"
+                            >
+                                ✏️ Փոփոխել
+                            </a>
+
+                            <form
+                                action="/profile/<%= profile.id %>/delete"
+                                method="POST"
+                                style="display:inline;"
+                            >
+
+                                <button
+                                    type="submit"
+                                    class="btn btn-danger"
+                                    data-confirm="Վստա՞հ ես, որ ցանկանում ես ջնջել այս ծառայությունը։"
+                                >
+                                    🗑️ Ջնջել
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            <% }) %>
+
+        </div>
+
+    </main>
+
+
+    <script src="/js/app.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="hy">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Գրանցում — Ijevan</title>
+
+<link
+    rel="stylesheet"
+    href="/css/style.css"
+>
+
+</head>
+
+<body>
+
+<%- include("partials/nav") %>
+
+<div class="form-page">
+
+    <div class="form-card">
+
+        <div class="form-icon">
+            🚀
+        </div>
+
+        <h1>
+            Ստեղծիր հաշիվ
+        </h1>
+
+        <p>
+            Միացիր Իջևանի հարթակին։
+        </p>
+
+        <% if (error) { %>
+
+            <div class="alert">
+                <%= error %>
+            </div>
+
+        <% } %>
+
+        <form method="POST">
+
+            <label>
+                Անուն
+            </label>
+
+            <input
+                class="input"
+                name="name"
+                required
+            >
+
+            <label>
+                Email
+            </label>
+
+            <input
+                class="input"
+                type="email"
+                name="email"
+                required
+            >
+
+            <label>
+                Գաղտնաբառ
+            </label>
+
+            <input
+                class="input"
+                type="password"
+                name="password"
+                minlength="6"
+                required
+            >
+
+            <button
+                class="btn full"
+                type="submit"
+            >
+                Գրանցվել
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

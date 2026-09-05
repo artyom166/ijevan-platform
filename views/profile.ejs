@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="hy">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+    <%= p.title %> — Ijevan
+</title>
+
+<link
+    rel="stylesheet"
+    href="/css/style.css"
+>
+
+</head>
+
+<body>
+
+<%- include("partials/nav") %>
+
+<main class="container">
+
+<div class="profile-detail">
+
+<div class="detail-image">
+
+<% if (p.image) { %>
+
+<img
+    src="<%= p.image %>"
+    alt="<%= p.title %>"
+>
+
+<% } else { %>
+
+<span>
+    <%= p.icon %>
+</span>
+
+<% } %>
+
+</div>
+
+
+<div class="detail-info">
+
+<div class="profile-category">
+
+<%= p.icon %>
+<%= p.category %>
+
+</div>
+
+<h1>
+    <%= p.title %>
+</h1>
+
+<h3>
+    👤 <%= p.owner %>
+</h3>
+
+<div class="big-rating">
+
+⭐ <%= Number(p.rating).toFixed(1) %>
+
+<span>
+    / 5
+</span>
+
+</div>
+
+<p class="detail-description">
+    <%= p.description %>
+</p>
+
+<div class="contact-list">
+
+<div>
+    📍 <%= p.address || "Իջևան" %>
+</div>
+
+<% if (p.phone) { %>
+
+<div>
+    📞 <%= p.phone %>
+</div>
+
+<% } %>
+
+</div>
+
+
+<div class="actions">
+
+<% if (p.phone) { %>
+
+<a
+    class="btn"
+    href="tel:<%= p.phone %>"
+>
+    📞 Զանգահարել
+</a>
+
+<% } %>
+
+
+<% if (user) { %>
+
+<form
+    method="POST"
+    action="/profile/<%= p.id %>/favorite"
+>
+
+<button class="btn secondary">
+
+<%= favorite
+    ? "❤️ Պահված է"
+    : "🤍 Պահել" %>
+
+</button>
+
+</form>
+
+<% } %>
+
+</div>
+
+</div>
+
+</div>
+
+
+<section class="reviews-section">
+
+<h2>
+    Գնահատականներ
+</h2>
+
+<% if (user) { %>
+
+<div class="review-form">
+
+<h3>
+    Գնահատիր այս պրոֆիլը
+</h3>
+
+<form
+    method="POST"
+    action="/profile/<%= p.id %>/review"
+>
+
+<select
+    class="input small-input"
+    name="rating"
+>
+
+<option value="5">
+    5 ⭐
+</option>
+
+<option value="4">
+    4 ⭐
+</option>
+
+<option value="3">
+    3 ⭐
+</option>
+
+<option value="2">
+    2 ⭐
+</option>
+
+<option value="1">
+    1 ⭐
+</option>
+
+</select>
+
+<textarea
+    class="input"
+    name="comment"
+    rows="3"
+    placeholder="Քո կարծիքը..."
+></textarea>
+
+<button class="btn">
+    Ուղարկել գնահատականը
+</button>
+
+</form>
+
+</div>
+
+<% } %>
+
+
+<% if (reviews.length) { %>
+
+<% reviews.forEach(r => { %>
+
+<div class="review">
+
+<div class="review-top">
+
+<strong>
+    <%= r.name %>
+</strong>
+
+<span>
+    ⭐ <%= r.rating %>
+</span>
+
+</div>
+
+<p>
+    <%= r.comment %>
+</p>
+
+</div>
+
+<% }) %>
+
+<% } else { %>
+
+<div class="empty">
+    Դեռ գնահատականներ չկան։
+</div>
+
+<% } %>
+
+</section>
+
+
+<% if (user) { %>
+
+<section class="report-section">
+
+<h3>
+    Զեկուցել պրոֆիլի մասին
+</h3>
+
+<form
+    method="POST"
+    action="/profile/<%= p.id %>/report"
+>
+
+<input
+    class="input"
+    name="reason"
+    placeholder="Նկարագրիր խնդիրը..."
+    required
+>
+
+<button class="btn danger">
+    🚨 Զեկուցել
+</button>
+
+</form>
+
+</section>
+
+<% } %>
+
+</main>
+
+</body>
+
+</html>

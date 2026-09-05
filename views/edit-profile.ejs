@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="hy">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Փոփոխել ծառայությունը | Ijevan</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/style.css"
+    >
+
+</head>
+
+<body>
+
+    <%- include("partials/nav") %>
+
+
+    <main class="container">
+
+        <div class="page-header">
+
+            <h1>
+                ✏️ Փոփոխել ծառայությունը
+            </h1>
+
+            <a
+                href="/profile/<%= profile.id %>"
+                class="btn btn-secondary"
+            >
+                ← Հետ
+            </a>
+
+        </div>
+
+
+        <% if (error) { %>
+
+            <div class="alert">
+                <%= error %>
+            </div>
+
+        <% } %>
+
+
+        <form
+            action="/profile/<%= profile.id %>/edit"
+            method="POST"
+            enctype="multipart/form-data"
+            class="form-card"
+        >
+
+            <div class="form-group">
+
+                <label>
+                    Կատեգորիա
+                </label>
+
+                <select
+                    name="category_id"
+                    required
+                >
+
+                    <% categories.forEach(category => { %>
+
+                        <option
+                            value="<%= category.id %>"
+                            <%= Number(category.id) === Number(profile.category_id) ? "selected" : "" %>
+                        >
+                            <%= category.icon %>
+                            <%= category.name %>
+                        </option>
+
+                    <% }) %>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Անվանում
+                </label>
+
+                <input
+                    type="text"
+                    name="title"
+                    value="<%= profile.title %>"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Նկարագրություն
+                </label>
+
+                <textarea
+                    name="description"
+                    rows="5"
+                ><%= profile.description %></textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Հեռախոս
+                </label>
+
+                <input
+                    type="text"
+                    name="phone"
+                    value="<%= profile.phone %>"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Հասցե
+                </label>
+
+                <input
+                    type="text"
+                    name="address"
+                    value="<%= profile.address %>"
+                >
+
+            </div>
+
+
+            <% if (profile.image) { %>
+
+                <div class="form-group">
+
+                    <label>
+                        Ներկայիս նկար
+                    </label>
+
+                    <img
+                        src="<%= profile.image %>"
+                        alt=""
+                        style="max-width:220px;border-radius:15px;"
+                    >
+
+                </div>
+
+            <% } %>
+
+
+            <div class="form-group">
+
+                <label>
+                    Նոր նկար
+                </label>
+
+                <input
+                    type="file"
+                    name="image"
+                    accept="image/jpeg,image/png,image/webp"
+                >
+
+                <small>
+                    JPG, PNG կամ WEBP — առավելագույնը 5MB
+                </small>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="btn"
+            >
+                💾 Պահպանել փոփոխությունները
+            </button>
+
+        </form>
+
+    </main>
+
+</body>
+
+</html>

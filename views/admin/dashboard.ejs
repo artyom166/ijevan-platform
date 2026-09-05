@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="hy">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Admin Panel</title>
+
+<link
+    rel="stylesheet"
+    href="/css/style.css"
+>
+
+</head>
+
+<body>
+
+<%- include("../partials/nav") %>
+
+<main class="container">
+
+<h1>
+    🛠 Admin Panel
+</h1>
+
+<div class="admin-nav">
+
+<a href="/admin" class="btn">
+    Dashboard
+</a>
+
+<a href="/admin/profiles" class="btn secondary">
+    Պրոֆիլներ
+</a>
+
+<a href="/admin/reports" class="btn secondary">
+    Reports
+</a>
+
+</div>
+
+
+<div class="stats-grid">
+
+<div class="stat-card">
+
+<span>
+    👥
+</span>
+
+<small>
+    Օգտատերեր
+</small>
+
+<strong>
+    <%= stats.users %>
+</strong>
+
+</div>
+
+
+<div class="stat-card">
+
+<span>
+    👤
+</span>
+
+<small>
+    Պրոֆիլներ
+</small>
+
+<strong>
+    <%= stats.profiles %>
+</strong>
+
+</div>
+
+
+<div class="stat-card">
+
+<span>
+    ⭐
+</span>
+
+<small>
+    Կարծիքներ
+</small>
+
+<strong>
+    <%= stats.reviews %>
+</strong>
+
+</div>
+
+
+<div class="stat-card">
+
+<span>
+    🚨
+</span>
+
+<small>
+    Pending Reports
+</small>
+
+<strong>
+    <%= stats.reports %>
+</strong>
+
+</div>
+
+</div>
+
+</main>
+
+</body>
+
+</html>

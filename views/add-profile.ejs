@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="hy">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Ավելացնել պրոֆիլ</title>
+
+<link
+    rel="stylesheet"
+    href="/css/style.css"
+>
+
+</head>
+
+<body>
+
+<%- include("partials/nav") %>
+
+<div class="form-page">
+
+<div class="form-card wide">
+
+<h1>
+    Ավելացրու քո պրոֆիլը
+</h1>
+
+<p>
+    Ներկայացրու քո ծառայությունը
+    Իջևանի մարդկանց։
+</p>
+
+<% if (error) { %>
+
+<div class="alert">
+    <%= error %>
+</div>
+
+<% } %>
+
+<form
+    method="POST"
+    enctype="multipart/form-data"
+>
+
+<label>
+    Կատեգորիա
+</label>
+
+<select
+    class="input"
+    name="category_id"
+    required
+>
+
+<option value="">
+    Ընտրիր կատեգորիա
+</option>
+
+<% categories.forEach(c => { %>
+
+<option value="<%= c.id %>">
+
+<%= c.icon %>
+<%= c.name %>
+
+</option>
+
+<% }) %>
+
+</select>
+
+
+<label>
+    Ծառայության անվանում
+</label>
+
+<input
+    class="input"
+    name="title"
+    placeholder="Օր․ BMW-ի վերանորոգում"
+    required
+>
+
+
+<label>
+    Նկարագրություն
+</label>
+
+<textarea
+    class="input"
+    name="description"
+    rows="5"
+    placeholder="Գրիր քո ծառայության մասին..."
+></textarea>
+
+
+<label>
+    Հեռախոս
+</label>
+
+<input
+    class="input"
+    name="phone"
+    placeholder="0XX XX XX XX"
+>
+
+
+<label>
+    Հասցե
+</label>
+
+<input
+    class="input"
+    name="address"
+    value="Իջևան"
+>
+
+
+<label>
+    Պրոֆիլի նկար
+</label>
+
+<input
+    class="input"
+    type="file"
+    name="image"
+    accept="image/jpeg,image/png,image/webp"
+>
+
+<p class="hint">
+    Առավելագույնը 5MB։
+</p>
+
+
+<button
+    class="btn full"
+    type="submit"
+>
+    🚀 Հրապարակել պրոֆիլը
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</body>
+
+</html>
